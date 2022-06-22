@@ -1,0 +1,50 @@
+{% include 'cabecera.html.twig' %}
+
+{#
+<h1>
+Usuario {{ app.user.usuario }} <br>
+Clave: {{ app.user.clave }} <br>
+¿email?: {{ app.user.email }} <br>
+¿rol?: {{ app.user.rol }} <br>
+recu trueofalse: {{ app.user.recupera }} <br>
+claveactivacion {{ app.user.claveact }} <br>
+activado trueofalse: {{ app.user.activado }} <br>
+edad {{ app.user.edad }} <br>
+ciudad {{ app.user.ciudad }} <br>
+aficiones {{ app.user.aficiones }} <br>
+avatar{{ app.user.avatar }} <br>
+bloqueo {{ app.user.bloqueo }} <br>
+Mensajes recibidos 
+ {% for mensaje in app.user.recibidos %}
+        <li>{{ mensaje.mensaje }}</li>
+        <li>{{ mensaje.fecha }}</li>
+    {% endfor %}
+</h1>
+#}
+<html>
+	<title>Bandeja de entrada</title>
+	<body>
+	<h1>Bandeja de entrada</h1>
+	<table>
+ 	{% for mensaje in app.user.recibidos %}
+	
+		{% if mensaje.borrado_entrada == false  %}
+		{% if mensaje.leido == false  %}
+   			<tr><td style='background-color:yellow'>{{ mensaje.remitente.usuario }}</td><td style='background-color:yellow'>	
+			{{ mensaje.mensaje|length > 15 ? mensaje.mensaje|slice(0, 10) ~ '...' : mensaje.mensaje  }}</td><td style='background-color:yellow'>{{ mensaje.fecha }}</td>
+			<td style=><a href={{path('ver_mensaje' , {'id': mensaje.id})}}>Ver mensaje </a>
+			<td style=><a href={{path('eliminar_mensaje' , {'id': mensaje.id})}}>Eliminar mensaje </a></td>
+
+		{% else %}
+		   <tr><td>{{ mensaje.remitente.usuario }}</td><td>
+		   {{ mensaje.mensaje|length > 15 ? mensaje.mensaje|slice(0, 10) ~ '...' : mensaje.mensaje  }}			   
+		   </td><td>{{ mensaje.fecha }}</td>
+		   <td style=><a href={{path('ver_mensaje' , {'id': mensaje.id})}}>Ver mensaje </a>
+		   <td style=><a href={{path('eliminar_mensaje' , {'id': mensaje.id})}}>Eliminar mensaje </a></td>
+		{% endif %}		
+		{% endif %}
+    {% endfor %}
+	</table>
+	
+	</body>
+</html>

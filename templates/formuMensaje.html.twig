@@ -1,0 +1,12 @@
+
+{% include 'cabecera.html.twig' %}
+{% if 'ROLE_BLOQUEADO' in app.user.roles %}
+Contacta con el administrador
+{% else %}
+<title>Nuevo mensaje</title>
+<h1> Formulario de envío de mensaje {{ app.user.usuario }} </h1>
+{{ form_start(form) }}
+{{ form_widget(form) }}
+{{ form_end(form) }}
+
+{% endif %}

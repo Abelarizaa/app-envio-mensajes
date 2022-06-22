@@ -1,0 +1,20 @@
+{% include 'cabecera.html.twig' %}
+
+<html>
+<body>
+{% if 'ROLE_BLOQUEADO' in app.user.roles %}
+Contacta con el administrador
+{% else %}
+<h1>Usuarios en el sistema </h1>
+
+<table>
+<tr><td>Foto de perfil</td><td>Nombre</td><td>Edad</td><td>Ciudad</td><td>Aficiones</td></tr>
+{% for usuario in usuarios %}
+{% if usuario.activado %}
+<tr><td><img src="uploads/{{usuario.avatar}}" width="80" height="80"></td><td>{{ usuario.usuario }}</td><td>{{ usuario.edad }}</td><td>{{ usuario.ciudad }}</td><td>{{ usuario.aficiones }}</td></tr>
+{% endif %}
+{% endfor %}
+</table>
+{% endif %}
+</body>
+</html>

@@ -1,0 +1,30 @@
+{# templates/login.html.twig #}
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>WhatsChat!</title>
+    </head>
+    <body>		
+		<h2>Bienvenido a WhatsChat!!!</h2>
+		{% if mensaje is defined %}
+		<br/>{{ mensaje }}
+		{% endif %}
+		<hr>
+    	<form action="{{ path('controlador_login') }}" method="post">
+			<br>
+			Usuario:
+			<input type="text" name="_username" />
+			<br>
+			Clave
+			<input type="password" name="_password" />
+			<br>
+			<button type="submit">login</button>
+		</form>
+		
+		<br/>
+		<td style=><a href={{path('registro')}}>¡Regístrate! </a></td></br>
+		<td style=><a href={{path('recuperacionclave')}}>¿Has olvidado tu contraseña? </a></td>
+		
+    </body>
+</html>

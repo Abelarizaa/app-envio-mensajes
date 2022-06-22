@@ -1,0 +1,31 @@
+	<div class="botones">
+		<table>
+			<tr>
+
+				{% if app.user.avatar == null %}
+   				<td>Bienvenido <a href={{path('area_usuario')}}>{{ app.user.usuario }} </a></td>	
+				{% else %}
+				<td>Bienvenid@ <a href={{path('area_usuario')}}>{{ app.user.usuario }} </a> <img src="uploads/{{app.user.avatar}}" width="80" height="80"></td>
+				{% endif %}
+				
+				{% if 'ROLE_BLOQUEADO' in app.user.roles %}
+				<td>Estás blouqeadísim@, solo puedes editar tu perfil, por favor contacta con el administrador</td>
+				{% else %}
+
+
+				<td> <a href={{path('bandeja_entrada')}}> Bandeja de entrada </a></td></td>
+				<td> <a href={{path('bandeja_salida')}}> Bandeja de salida </a></td></td>
+				<td> <a href={{path('enviar_mensaje') }}> Nuevo mensaje </a></td></td>
+				<td> <a href={{path('ver_users') }}> Ver a los usuarios </a></td></td>
+				{% if app.user.rol %}
+				<td> <a href={{path('controlador_portal_admin')}}>Zona de administración</a></td></td>
+				{% endif %}
+
+
+
+				{% endif %}
+				<td> <a href={{path('controlador_logout') }}> Logout</a></td></td>
+			</tr>
+		</table>
+		</div>
+		<hr/>

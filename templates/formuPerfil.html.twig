@@ -1,0 +1,11 @@
+{% include 'cabecera.html.twig' %}
+
+<h1> Bienvenido a tu perfil {{ app.user.usuario }} </h1>
+
+{{ form_start(form) }}
+{{ form_widget(form) }}
+{{ form_end(form) }}
+
+{% if mensaje is defined %}
+    <strong>{{mensaje}}</strong>
+{% endif %}

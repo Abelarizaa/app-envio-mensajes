@@ -1,0 +1,63 @@
+
+
+{#
+<h1>
+Usuario {{ app.user.usuario }} <br>
+Clave: {{ app.user.clave }} <br>
+¿email?: {{ app.user.email }} <br>
+¿rol?: {{ app.user.rol }} <br>
+recu trueofalse: {{ app.user.recupera }} <br>
+claveactivacion {{ app.user.claveact }} <br>
+activado trueofalse: {{ app.user.activado }} <br>
+edad {{ app.user.edad }} <br>
+ciudad {{ app.user.ciudad }} <br>
+aficiones {{ app.user.aficiones }} <br>
+avatar{{ app.user.avatar }} <br>
+bloqueo {{ app.user.bloqueo }} <br>
+Mensajes recibidos 
+ {% for mensaje in app.user.recibidos %}
+        <li>{{ mensaje.mensaje }}</li>
+        <li>{{ mensaje.fecha }}</li>
+    {% endfor %}
+</h1>
+#}
+<html>
+	<title>Bandeja de Salida</title>
+	{% block javascripts %}
+        <script src="{{ asset('funciones.js') }}" type="text/javascript"></script>
+    {% endblock %}
+		<title>Bandeja de salida</title>
+		<meta charset = "UTF-8">
+		<script type = "text/javascript" src = "funciones.js"></script>		
+	</head>	
+{% include 'cabecera.html.twig' %}
+{% if 'ROLE_BLOQUEADO' in app.user.roles %}
+Contacta con el administrador
+{% else %}
+	<body>		
+	<h1>Bandeja de salida</h1>
+	<table>
+	<tr><td>Destinatario</td><td>Mensaje</td><td>Fecha</td></tr>
+ 	{% for mensaje in app.user.enviados|reverse %}
+	
+		{% if mensaje.borrado_salida == false  %}
+		{% if mensaje.leido == false  %}
+   			<tr style='background-color:yellow' id={{mensaje.id}}><td>{{ mensaje.destinatario.usuario }}</td><td>	
+			{{ mensaje.mensaje|length > 15 ? mensaje.mensaje|slice(0, 10) ~ '...' : mensaje.mensaje  }}</td><td>{{ mensaje.fecha }}</td>
+			<td><button onclick = "return ver_mensaje_salida({{mensaje.id}});">Ver mensaje </button>
+			<td><button onclick = "return borrar_mensaje_salida({{mensaje.id}});">Eliminar mensaje </button>
+
+		{% else %}
+		   <tr  id='{{mensaje.id}}'><td>{{ mensaje.destinatario.usuario }}</td><td>
+		   {{ mensaje.mensaje|length > 15 ? mensaje.mensaje|slice(0, 10) ~ '...' : mensaje.mensaje  }}			   
+		   </td><td>{{ mensaje.fecha }}</td>
+		   <td style=><button onclick = "return ver_mensaje_salida({{mensaje.id}});">Ver mensaje </button>
+			<td><button onclick = "return borrar_mensaje_salida({{mensaje.id}});">Eliminar mensaje </button>
+		{% endif %}		
+		{% endif %}
+    {% endfor %}
+	</table>
+		<section id = "principal"></section><br>
+{% endif %}	
+	</body>
+</html>

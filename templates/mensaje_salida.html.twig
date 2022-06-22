@@ -1,0 +1,29 @@
+{% include 'cabecera.html.twig' %}
+
+{#
+<h1>
+Usuario {{ app.user.usuario }} <br>
+Clave: {{ app.user.clave }} <br>
+¿email?: {{ app.user.email }} <br>
+¿rol?: {{ app.user.rol }} <br>
+recu trueofalse: {{ app.user.recupera }} <br>
+claveactivacion {{ app.user.claveact }} <br>
+activado trueofalse: {{ app.user.activado }} <br>
+edad {{ app.user.edad }} <br>
+ciudad {{ app.user.ciudad }} <br>
+aficiones {{ app.user.aficiones }} <br>
+avatar{{ app.user.avatar }} <br>
+bloqueo {{ app.user.bloqueo }} <br>
+Mensajes recibidos 
+ {% for mensaje in app.user.recibidos %}
+        <li>{{ mensaje.mensaje }}</li>
+        <li>{{ mensaje.fecha }}</li>
+    {% endfor %}
+</h1>
+#}
+<html>
+<body>
+<h1>Mensaje de {{ mensaje.remitente.usuario }}</h1>
+{{mensaje.mensaje}}
+</body>
+</html>
